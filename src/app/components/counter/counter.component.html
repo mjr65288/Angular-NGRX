@@ -1,0 +1,8 @@
+<!-- <div>Method 1 Count: {{ counter }}</div> -->
+<!-- <div>Methods 2 Count: {{ (count$ | async).count }}</div> -->
+<div>Methods 3 Feature Count: {{ featureCount$ | async }}</div>
+
+<button type="button" class="btn btn-success" (click)="increment()">Increment</button>
+<button type="button" class="btn btn-success" (click)="custIncrement()">Increment by 3</button>
+<button type="button" class="btn btn-warning" (click)="decrement()">Decrement</button>
+<button type="button" class="btn btn-danger" (click)="reset()">Reset Counter</button>
