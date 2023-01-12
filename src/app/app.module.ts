@@ -11,24 +11,17 @@ import { appReducer } from './store/app.state';
 
 import { AppComponent } from './app.component';
 import { GalleryComponent } from './gallery/gallery.component';
-
-import { AddPostComponent } from './components/add-post/add-post.component';
 import { HeaderComponent } from './components/header/header.component';
-import { HomeComponent } from './components/home/home.component';
-import { PostListComponent } from './components/post-list/post-list.component';
+import { HomeComponent } from './home/home.component';
 
 import { AppRoutingModule } from './app-routing.module';
-import { EditPostComponent } from './components/edit-post/edit-post.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GalleryComponent,
-    AddPostComponent,
     HeaderComponent,
     HomeComponent,
-    PostListComponent,
-    EditPostComponent
   ],
   imports: [
     BrowserModule,

@@ -6,11 +6,11 @@ import {
   decrement,
   reset,
   customIncrement,
-} from '../../store/actions/counter.action';
-import { CounterState } from '../../store/models/counter-state.model';
-import { AppState } from '../../store/app.state';
+} from '../store/actions/counter.action';
+import { CounterState } from '../store/models/counter-state.model';
+import { AppState } from '../store/app.state';
 
-import { selectFeatureCount } from '../../store/selectors/counter.selector';
+import { selectFeatureCount } from '../store/selectors/counter.selector';
 
 @Component({
   selector: 'counter',
