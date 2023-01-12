@@ -1,4 +1,4 @@
-//import { AuthEffects } from './state/auth.effects';
+import { AuthEffects } from './state/auth.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { LoginComponent } from './login/login.component';
 import { Routes, RouterModule } from '@angular/router';
@@ -26,7 +26,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    //EffectsModule.forFeature(),
+    EffectsModule.forFeature([AuthEffects]),
     RouterModule.forChild(routes),
     StoreModule.forFeature(featureKey, AuthReducer)
   ],

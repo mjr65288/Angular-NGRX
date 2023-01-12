@@ -1,5 +1,4 @@
-//import { setLoadingSpinner } from './../../store/Shared/shared.actions';
-//import { loginStart } from './../state/auth.actions';
+import { loginStart } from './../state/auth.actions';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -34,8 +33,7 @@ export class LoginComponent implements OnInit {
   onLoginSubmit() {
     const email = this.loginForm.value.email;
     const password = this.loginForm.value.password;
-    //this.store.dispatch(setLoadingSpinner({ status: true }));
-    //this.store.dispatch(loginStart({ email, password }));
-    console.log(this.loginForm.value);
+    //console.log(this.loginForm.value);
+    this.store.dispatch(loginStart({email, password}))
   }
 }

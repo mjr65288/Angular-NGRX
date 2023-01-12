@@ -31,10 +31,8 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule,
 
     //Binding the store.The store contains only a single reducer
-    StoreModule.forRoot({}
-      //{count: counterReducer,}
-     // appReducer
-    ),
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
   ],
   providers: [],
   bootstrap: [AppComponent]
