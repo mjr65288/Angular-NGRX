@@ -15,6 +15,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './home/home.component';
 
 import { AppRoutingModule } from './app-routing.module';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,9 @@ import { AppRoutingModule } from './app-routing.module';
     //Binding the store.The store contains only a single reducer
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
+    // Instrumentation must be imported after importing StoreModule (config is optional)
+    StoreDevtoolsModule.instrument({ maxAge: 25, // Retains last 25 states
+      logOnly: environment.production }),
   ],
   providers: [],
   bootstrap: [AppComponent]
