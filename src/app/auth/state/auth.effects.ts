@@ -22,12 +22,12 @@ export class AuthEffects {
 
   login$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(loginStart),
+      ofType(loginStart),//ofType filters for loginStart action.https://www.tektutorialshub.com/angular/using-exhaustmap-in-angular/
       exhaustMap((action) => {
         return this.authService
-          .login(action.email, action.password)
+          .login(action.email, action.password)//exhaustMap must retun an observable, which .login() does.
           .pipe(map((data) => {
-            return loginSuccess();
+            return loginSuccess(); //call the loginSuccess action, another way of dispatching an action
           })
           );
       })

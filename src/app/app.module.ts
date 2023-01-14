@@ -32,11 +32,12 @@ import { environment } from '../environments/environment';
     ReactiveFormsModule,
     AppRoutingModule,
 
-    //Binding the store.The store contains only a single reducer
+    // Binding the store.The store contains only a single reducer.
     StoreModule.forRoot({}),
+    // Register the effects so they start running.
     EffectsModule.forRoot([]),
     // Instrumentation must be imported after importing StoreModule (config is optional)
-    StoreDevtoolsModule.instrument({ maxAge: 25, // Retains last 25 states
+    StoreDevtoolsModule.instrument({ maxAge: 25, // Retains last 25 states.
       logOnly: environment.production }),
   ],
   providers: [],

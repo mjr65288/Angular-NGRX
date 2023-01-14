@@ -31,9 +31,10 @@ export class LoginComponent implements OnInit {
   }
 
   onLoginSubmit() {
-    const email = this.loginForm.value.email;
+    const email = this.loginForm.value.email; //test@test.com, 123456
     const password = this.loginForm.value.password;
     //console.log(this.loginForm.value);
-    this.store.dispatch(loginStart({email, password}))
+    this.store.dispatch(loginStart({email, password}))//This will trigger the auth.effect since we are filtering
+    //for the loginStart action. See code of auth.effect
   }
 }
