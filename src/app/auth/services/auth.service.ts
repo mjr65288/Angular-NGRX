@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthResponseData } from '../models/authResponseData.model';
 import { environment } from 'src/environments/environment';
+import { User } from '../models/user.model';
 
 
 @Injectable({
@@ -17,5 +18,11 @@ export class AuthService {
       `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.FIRBASE_API_KEY}`,
       { email, password, returnSecureToken: true }
     );
+  }
+
+  formatUser(data: AuthResponseData) {
+    const expirationDate = new Date(new Date().getTime() + +data.expiresIn * 1000)
+    const user = new User(data.email, data.idToken, data.localId, expirationDate);
+    return user;
   }
 }

@@ -27,7 +27,8 @@ export class AuthEffects {
         return this.authService
           .login(action.email, action.password)//exhaustMap must retun an observable, which .login() does.
           .pipe(map((data) => {
-            return loginSuccess(); //call the loginSuccess action, another way of dispatching an action
+            const user = this.authService.formatUser(data)
+            return loginSuccess({user:user}); //call the loginSuccess action, another way of dispatching an action
           })
           );
       })
