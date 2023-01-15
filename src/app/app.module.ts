@@ -10,20 +10,19 @@ import { StoreModule } from '@ngrx/store';
 import { appReducer } from './store/app.state';
 
 import { AppComponent } from './app.component';
-import { GalleryComponent } from './gallery/gallery.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './home/home.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 @NgModule({
   declarations: [
     AppComponent,
-    GalleryComponent,
     HeaderComponent,
     HomeComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +32,7 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
 
     // Binding the store.The store contains only a single reducer.
-    StoreModule.forRoot({}),
+    StoreModule.forRoot(appReducer),
     // Register the effects so they start running.
     EffectsModule.forRoot([]),
     // Instrumentation must be imported after importing StoreModule (config is optional)

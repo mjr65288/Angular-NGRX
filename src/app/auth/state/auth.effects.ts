@@ -10,6 +10,7 @@ import { AppState } from 'src/app/store/app.state';
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { setLoadingSpinner } from 'src/app/store/actions/shared.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -17,7 +18,8 @@ export class AuthEffects {
     private actions$: Actions,
     private authService: AuthService,
     private store: Store<AppState>,
-    private router: Router
+    private router: Router,
+
   ) { }
 
   login$ = createEffect(() => {
@@ -27,6 +29,7 @@ export class AuthEffects {
         return this.authService
           .login(action.email, action.password)//exhaustMap must retun an observable, which .login() does.
           .pipe(map((data) => {
+            this.store.dispatch(setLoadingSpinner({status:false}))
             const user = this.authService.formatUser(data)
             return loginSuccess({user:user}); //call the loginSuccess action, another way of dispatching an action
           })
