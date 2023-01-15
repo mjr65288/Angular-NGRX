@@ -17,8 +17,9 @@ export class AuthEffects {
   constructor(
     private actions$: Actions,
     private authService: AuthService,
-    private store: Store<AppState>
-  ) {}
+    private store: Store<AppState>,
+    private router: Router
+  ) { }
 
   login$ = createEffect(() => {
     return this.actions$.pipe(
@@ -43,4 +44,16 @@ export class AuthEffects {
       })
     );
   });
+
+  loginRedirect$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(loginSuccess),
+        tap((action) => { // tap does not retun anything, map does.
+          this.router.navigate(['/']);
+        })
+      );
+    },
+    { dispatch: false } // By not dispacthing an action, the effect does return an observable.
+  );
 }
