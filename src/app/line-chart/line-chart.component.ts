@@ -38,6 +38,7 @@ export class LineChartComponent implements OnInit {
   private margin = 50;
   private width = 750 - this.margin * 2;
   private height = 400 - this.margin * 2;
+  private lineMaker:any;
 
   constructor(public chartElem: ElementRef) { }
 
@@ -48,6 +49,7 @@ export class LineChartComponent implements OnInit {
     this.createCyScale();
     this.createCy2Scale();
     this.createChart();
+    this.createLine();
   }
 
   createCxScale() {
@@ -68,14 +70,6 @@ export class LineChartComponent implements OnInit {
     this.scY2 = d3.scaleLinear()
       .domain([d3.max(this.data, d => +d.y2 as any), d3.min(this.data, d => +d.y2 as any)])
       .range([this.pxY, 0]);
-  }
-
-  private getNewMaxValue(prop: String) {
-    return d3.max(this.data, (d: any) => d.prop) as Number;
-  }
-
-  private getNewMinValue(prop: String) {
-    return d3.min(this.data, (d: any) => d.prop) as Number;
   }
 
   // Step 1: create the svg element
@@ -133,10 +127,31 @@ export class LineChartComponent implements OnInit {
         let x = +d.x;
         return this.scX(x)
       })
-      .attr("cy", (d: DummyData) =>{
+      .attr("cy", (d: DummyData) => {
         let y = +d.y2
         return this.scY2(y)
       });
 
   }
+
+  createLine() {
+    this.lineMaker = d3.line()
+                .x( (d:any) => this.scX( d["x"] ) )
+                .y( (d:any) => this.scY( d["y"] ) );
+
+            d3.select( "#ds1" )
+                .append( "path" )
+                .attr( "fill", "none" ).attr( "stroke", "red" )
+                .attr( "d", this.lineMaker(this.data) );
+
+            this.lineMaker.y( (d:any) => this.scY2( d["y2"] ) );
+
+            d3.select( "#ds2" )
+                .append( "path" )
+                .attr( "fill", "none" ).attr( "stroke", "cyan" )
+                .attr( "d", this.lineMaker(this.data) );
+
+//          d3.select( "#ds2" ).attr( "fill", "red" );
+  }
+
 }
