@@ -26,6 +26,7 @@ const routes: Routes = [
   { path: 'bar2', loadChildren: () => import('./bar2/bar2.module').then(m => m.Bar2Module) },
   { path: 'scatter-plot', loadChildren: () => import('./scatter-plot/scatter-plot.module').then(m => m.ScatterPlotModule) },
   { path: 'line-chart', loadChildren: () => import('./line-chart/line-chart.module').then(m => m.LineChartModule) },
+  { path: 'line-chart-axis', loadChildren: () => import('./line-chart-axis/line-chart-axis.module').then(m => m.LineChartAxisModule) },
 ];
 
 @NgModule({
