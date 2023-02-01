@@ -77,6 +77,7 @@ export class LineChartAxisComponent implements OnInit {
       .append('g')
       .attr('transform', 'translate(' + this.margin + ',' + this.margin + ')');
 
+      // Create the two <g> container elements, one for each data set
       this.g1 = this.svg.append( "g" );                           6
       this.g2 = this.svg.append( "g" );
   }
@@ -100,16 +101,30 @@ export class LineChartAxisComponent implements OnInit {
   }
 
   createAxes(){
+    /**The axis for the first data set is drawn on the left side of the graph; remember that by default all axes are rendered
+     * at the origin. The axisRight object draws tick labels on the right side of the axis, so that they are outside the
+     * graph if the axis is placed on the graph’s right side. Here, we use it on the left side and allow for the tick labels
+     * to be inside the graph. */
     this.axMkr = d3.axisRight( this.scY );
+
+    /**he factory function d3.axisRight( scale ) returns a function object that generates the axis with all its parts.
+     * It requires an SVG container (typically a <g> element) as argument, and creates all elements of
+     * the axis as children of this container element. */
     this.axMkr( this.svg.append("g") );
+
 
     this.axMkr = d3.axisLeft( this.scY2 );
     this.svg.append( "g" )
+      /**For the axis on the right side of the graph, the container element must be moved to the appropriate location.
+       *This is done using the SVG transform attribute */
       .attr( "transform", "translate(" + this.pxX + ",0)" )
+      /**Instead of calling the axMkr function explicitly with the containing <g> element as argument,
+       * the axMkr function is passed as argument to the call() function instead. */
       .call( this.axMkr );
 
-    this.svg.append( "g" ).call( d3.axisTop( this.scX ) )
-      .attr( "transform", "translate(0,"+this.pxY+")" );
+    this.svg.append( "g" )
+    .attr( "transform", "translate(0,"+this.pxY+")" )
+    .call( d3.axisTop( this.scX ));
   }
 
   // Step 2: render the chart
